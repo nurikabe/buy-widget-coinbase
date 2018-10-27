@@ -1,9 +1,12 @@
 <?php
 /**
  * Plugin Name: Coinbase Buy Widget
+ * Plugin URI: https://github.com/nurikabe/coinbase-buy-widget
  * Description: Quick integration of the Coinbase "Buy Widget" for WordPress
- * Version: 0.1
+ * Version: 0.2
  * Author: Evan Owens
+ * Author URI: https://github.com/nurikabe
+ * Text Domain: coinbase-buy-widget
  * License: GPLv2 or later
  */
 
@@ -21,12 +24,8 @@ class Coinbase_Buy_Widget extends WP_Widget
 	}
 
 	public function admin_init() {
-		//register_setting( 'coinbase_buy_widget', 'coinbase_private_key' );
-		//register_setting( 'coinbase_buy_widget', 'coinbase_public_key' );
 		register_setting( 'coinbase_buy_widget', 'coinbase_code' );
 		add_settings_section( 'coinbase-buy-widget-keys', '', array($this, 'section_description_cb'), 'coinbase_buy_widget' );
-		//add_settings_field( 'coinbase_private_key', __('Private Key', 'coinbase-buy-widget'), array($this, 'field_cb'), 'coinbase_buy_widget', 'coinbase-buy-widget-keys', 'coinbase_private_key' );
-		//add_settings_field( 'coinbase_public_key', __('Public Key', 'coinbase-buy-widget'), array($this, 'field_cb'), 'coinbase_buy_widget', 'coinbase-buy-widget-keys', 'coinbase_public_key' );
 		add_settings_field( 'coinbase_code', __('Code', 'coinbase-buy-widget'), array($this, 'field_cb'), 'coinbase_buy_widget', 'coinbase-buy-widget-keys', 'coinbase_code' );
 	}
 
@@ -41,7 +40,7 @@ class Coinbase_Buy_Widget extends WP_Widget
 	}
 
 	public function section_description_cb() {
-		echo '<p>Contact Coinbase to receive the code for your Buy Widget</p>';
+		echo '<p><a href="https://developers.coinbase.com/docs/buy-widget#setting-up-the-buy-widget" target="_blank">Contact Coinbase</a> to receive the authentication code for your Buy Widget</p>';
 	}
 
 	public function options_page() {
