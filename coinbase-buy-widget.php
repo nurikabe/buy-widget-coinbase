@@ -8,6 +8,7 @@
  * Author URI: https://github.com/nurikabe
  * Text Domain: coinbase-buy-widget
  * License: GPLv2 or later
+ * License URI: License URI: https://www.gnu.org/licenses/gpl-2.0
  */
 
 class Coinbase_Buy_Widget extends WP_Widget
