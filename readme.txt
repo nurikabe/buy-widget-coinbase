@@ -24,3 +24,10 @@ about acquiring a code.
 == Screenshots ==
 1. Coinbase Buy Widget Sidebar
 2. Coinbase Buy Widget Modal
+
+== Changelog ==
+
+= 1.0 =
+
+Initial release
+

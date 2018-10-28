@@ -3,7 +3,7 @@
  * Plugin Name: Coinbase Buy Widget
  * Plugin URI: https://github.com/nurikabe/coinbase-buy-widget
  * Description: Quick integration of the Coinbase "Buy Widget" for WordPress
- * Version: 0.2
+ * Version: 1.0
  * Author: Evan Owens
  * Author URI: https://github.com/nurikabe
  * Text Domain: coinbase-buy-widget
