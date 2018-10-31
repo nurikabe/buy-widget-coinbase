@@ -1,42 +1,42 @@
 <?php
 /**
- * Plugin Name: Coinbase Buy Widget
- * Plugin URI: https://github.com/nurikabe/coinbase-buy-widget
+ * Plugin Name: Buy Widget Coinbase
+ * Plugin URI: https://github.com/nurikabe/buy-widget-coinbase
  * Description: Quick integration of the Coinbase "Buy Widget" for WordPress
- * Version: 1.0
+ * Version: 1.1
  * Author: Evan Owens
  * Author URI: https://github.com/nurikabe
- * Text Domain: coinbase-buy-widget
+ * Text Domain: buy-widget-coinbase
  * License: GPLv2 or later
  * License URI: License URI: https://www.gnu.org/licenses/gpl-2.0
  */
 
-class Coinbase_Buy_Widget extends WP_Widget
+class Buy_Widget_Coinbase extends WP_Widget
 {
 	public function __construct() {
 	    $options = array(
 		    'customize_selective_refresh' => true,
             'description' => 'Displays the Buy Widget from Coinbase'
         );
-		parent::__construct( 'coinbase_buy_widget', __( 'Coinbase Buy Widget', 'coinbase-buy-widget' ), $options );
+		parent::__construct( 'buy_widget_coinbase', __( 'Buy Widget', 'buy-widget-coinbase' ), $options );
 
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 	}
 
 	public function admin_init() {
-		register_setting( 'coinbase_buy_widget', 'coinbase_code' );
-		add_settings_section( 'coinbase-buy-widget-keys', '', array($this, 'section_description_cb'), 'coinbase_buy_widget' );
-		add_settings_field( 'coinbase_code', __('Code', 'coinbase-buy-widget'), array($this, 'field_cb'), 'coinbase_buy_widget', 'coinbase-buy-widget-keys', 'coinbase_code' );
+		register_setting( 'buy_widget_coinbase', 'coinbase_code' );
+		add_settings_section( 'coinbase-code', '', array($this, 'section_description_cb'), 'buy_widget_coinbase' );
+		add_settings_field( 'coinbase_code', __('Code', 'buy-widget-coinbase'), array($this, 'field_cb'), 'buy_widget_coinbase', 'coinbase-code', 'coinbase_code' );
 	}
 
 	public function admin_menu() {
-		add_options_page( 'Coinbase Buy Widget', 'Coinbase Buy Widget', 'manage_options', 'coinbase-buy-widget-options', array($this, 'options_page') );
+		add_options_page( 'Buy Widget', 'Buy Widget', 'manage_options', 'coinbase-buy-widget-options', array($this, 'options_page') );
 	}
 
 	public function field_cb( $name ) {
 		// Cannot register multiple settings via callback
-		//register_setting( 'coinbase_buy_widget', $name );
+		//register_setting( 'buy_widget_coinbase', $name );
 		echo '<input type="text" name="'.$name.'" value="'.get_option($name).'" />';
 	}
 
@@ -47,13 +47,13 @@ class Coinbase_Buy_Widget extends WP_Widget
 	public function options_page() {
 		?>
 		<div class="wrap">
-			<h2><?php _e( 'Coinbase Buy Widget Options', 'coinbase-buy-widget' ) ?></h2>
+			<h2><?php _e( 'Buy Widget Options', 'buy-widget-coinbase' ) ?></h2>
 			<form action="options.php" method="post">
 				<?php
 				// Output security fields
-				settings_fields( 'coinbase_buy_widget' );
+				settings_fields( 'buy_widget_coinbase' );
 				// Output setting sections and their fields for the given *page*
-				do_settings_sections( 'coinbase_buy_widget' );
+				do_settings_sections( 'buy_widget_coinbase' );
 				// Standard WordPress button
 				submit_button();
 				?>
@@ -143,38 +143,38 @@ class Coinbase_Buy_Widget extends WP_Widget
 
 		<?php // Widget Title ?>
         <p>
-            <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Title:', 'coinbase-buy-widget' ); ?></label>
+            <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Title:', 'buy-widget-coinbase' ); ?></label>
             <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
         </p>
 
 		<?php // Textarea Field ?>
         <p>
-            <label for="<?php echo esc_attr( $this->get_field_id( 'textarea' ) ); ?>"><?php _e( 'Text above buy button:', 'coinbase-buy-widget' ); ?></label>
+            <label for="<?php echo esc_attr( $this->get_field_id( 'textarea' ) ); ?>"><?php _e( 'Text above buy button:', 'buy-widget-coinbase' ); ?></label>
             <textarea class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'textarea' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'textarea' ) ); ?>"><?php echo wp_kses_post( $textarea ); ?></textarea>
         </p>
 
 		<?php // Destination Address ?>
         <p>
-            <label for="<?php echo esc_attr( $this->get_field_id( 'destination_address' ) ); ?>"><?php _e( 'Destination address:', 'coinbase-buy-widget' ); ?></label>
+            <label for="<?php echo esc_attr( $this->get_field_id( 'destination_address' ) ); ?>"><?php _e( 'Destination address:', 'buy-widget-coinbase' ); ?></label>
             <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'destination_address' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'destination_address' ) ); ?>" type="text" value="<?php echo esc_attr( $destination_address ); ?>" />
         </p>
 
 		<?php // Amount ?>
         <p>
-            <label for="<?php echo esc_attr( $this->get_field_id( 'amount' ) ); ?>"><?php _e( 'Default fiat amount:', 'coinbase-buy-widget' ); ?></label>
+            <label for="<?php echo esc_attr( $this->get_field_id( 'amount' ) ); ?>"><?php _e( 'Default fiat amount:', 'buy-widget-coinbase' ); ?></label>
             <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'amount' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'amount' ) ); ?>" type="text" value="<?php echo esc_attr( $amount ); ?>" />
         </p>
 
         <p>
             <?php // Currency ?>
             <div style="float: left; margin-right: 1em;">
-                <label for="<?php echo esc_attr( $this->get_field_id( 'currency' ) ); ?>"><?php _e( 'Currency:', 'coinbase-buy-widget' ); ?></label><br/>
+                <label for="<?php echo esc_attr( $this->get_field_id( 'currency' ) ); ?>"><?php _e( 'Currency:', 'buy-widget-coinbase' ); ?></label><br/>
                 <input size="3" id="<?php echo esc_attr( $this->get_field_id( 'currency' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'currency' ) ); ?>" type="text" value="<?php echo esc_attr( $currency ); ?>" />
             </div>
 
             <?php // Cryptocurrency ?>
             <div>
-                <label for="<?php echo esc_attr( $this->get_field_id( 'cryptocurrency' ) ); ?>"><?php _e( 'Crypto:', 'coinbase-buy-widget' ); ?></label><br/>
+                <label for="<?php echo esc_attr( $this->get_field_id( 'cryptocurrency' ) ); ?>"><?php _e( 'Crypto:', 'buy-widget-coinbase' ); ?></label><br/>
                 <select id="<?php echo esc_attr( $this->get_field_id( 'cryptocurrency' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'cryptocurrency' ) ); ?>">
                     <option value="BTC"<?php echo 'BTC' == $cryptocurrency ? ' selected' : '' ?>>Bitcoin</option>
                     <option value="BCH"<?php echo 'BCH' == $cryptocurrency ? ' selected' : '' ?>>Bitcoin Cash</option>
@@ -198,4 +198,4 @@ class Coinbase_Buy_Widget extends WP_Widget
 	}
 }
 
-add_action( 'widgets_init', function() { register_widget( 'Coinbase_Buy_Widget' ); });
+add_action( 'widgets_init', function() { register_widget( 'Buy_Widget_Coinbase' ); });
